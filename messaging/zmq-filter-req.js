@@ -10,7 +10,7 @@ requester.on('message', function(data) {
   console.log('Received response: ', response);
 });
 
-requester.connect('tcp://localhost:5432');
+requester.connect('tcp://localhost:5433');
 
 //send request for content
 console.log('Sending request for ' + filename);

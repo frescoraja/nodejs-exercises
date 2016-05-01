@@ -13,17 +13,23 @@ const
 
     //read file and reply with content
     fs.readFile(request.path, function(err, content) {
-      console.log('Sending response content');
-      responder.send(JSON.stringify({
-        content: content.toString(),
-        timestamp: Date.now(),
-        pid: process.pid
-      }));
+      if (err) {
+        console.log("Error encountered on request: ");
+        console.log(err);
+        responder.emit(err);
+      } else {
+        console.log('Sending response content');
+        responder.send(JSON.stringify({
+          content: content.toString(),
+          timestamp: Date.now(),
+          pid: process.pid
+        }));
+      }
     });
 
   });
 
-responder.bind('tcp://127.0.0.1:5432', function(err) {
+responder.bind('tcp://127.0.0.1:5433', function(err) {
   console.log('Listening for zmq requesters...');
 });
 

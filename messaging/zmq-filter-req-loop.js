@@ -5,12 +5,12 @@ const
   //create request endpoint
   requester = zmq.socket('req');
 
-requester.on('message', function(data) {
+requester.on('message', function(data, err) {
   let response = JSON.parse(data);
   console.log('Received response: ', response);
 });
 
-requester.connect('tcp://localhost:5432');
+requester.connect('tcp://localhost:5433');
 
 //send request for content
 for (let i = 1; i <= 3; i++) {
@@ -19,3 +19,9 @@ for (let i = 1; i <= 3; i++) {
     path: filename
   }));
 }
+
+process.on('SIGINT', function() {
+  console.log("connection closed by user.");
+  requester.close();
+});
+
