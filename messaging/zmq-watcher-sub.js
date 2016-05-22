@@ -16,4 +16,6 @@ const
     console.log("File '" + message.file + "' changed at " + date);
   });
 
-subscriber.connect("tcp://localhost:5432");
+subscriber.connect("tcp://localhost:5444", function(err) {
+  console.log("subscribed to localhost:5444..");
+});

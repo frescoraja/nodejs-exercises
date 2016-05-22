@@ -19,7 +19,7 @@ fs.watch(filename, function() {
 
 });
 
-//listen on TCP port 5432
-publisher.connect('tcp://*:5432', function(err) {
+//listen on TCP port 5444
+publisher.bind("tcp://*:5444", function(err) {
     console.log("Listening for subscribers...");
 });
